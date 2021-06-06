@@ -1,0 +1,54 @@
+<div class="container mb-3">
+  <div class="row g-10">
+      <div class="col-md-3">
+          <select class="form-select" [(ngModel)]="selectedOption">
+            <option value="FirstName">Name</option>
+            <option value="LastNAme">Surname</option>
+            <option value="Address">Address</option>
+            <option value="Contact">Contact</option>
+            <option value="Email">Email</option>
+          </select>
+      </div>
+    <div class="col-md-9">
+        <input type="text" class="form-control" size="50"  placeholder="Search" [(ngModel)]="searchValue">
+    </div>
+  </div>
+</div>
+<div class="table-responsive-xl">
+<table class="table text-center table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Surname</th>
+        <th scope="col">Address</th>
+        <th scope="col">Contact</th>
+        <th scope="col">Email</th>
+        <th scope="col">Update</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let u of users | async | filter: searchValue : selectedOption | paginate: config">
+            <td>{{u.FirstName}}</td>
+            <td>{{u.LastNAme}}</td>
+            <td>{{u.Address}}</td>
+            <td>{{u.Contact}}</td>
+            <td>{{u.Email}}</td>
+            <td><button type="button" class="btn btn-primary" (click)="getUser(u)">Update</button></td>
+            <td><button type="button" class="btn btn-danger" (click)="deleteUser(u.id)">Delete</button></td>
+        </tr>
+    </tbody>
+</table>
+</div>
+<h1 *ngIf="!isFetching" class="display-6 p-3 mb-2 text-center">Loading...</h1>
+<div *ngIf="errorMessage === 'fetch'" class="alert alert-danger" role="alert">Server Timeout... Please Try Again</div>
+<h1 *ngIf="(users | async | filter: searchValue : selectedOption).length <1 && isFetching && !errorMessage" class="display-6 p-3 mb-2 text-center">No Data Present</h1>
+<div *ngIf="(users | async | filter: searchValue : selectedOption).length >1 && isFetching" class="d-flex justify-content-center">
+    <pagination-controls 
+      previousLabel="Prev" 
+      nextLabel="Next"
+      (pageChange)="pageChanged($event)">
+    </pagination-controls> 
+</div>
+<div *ngIf="deletingUser" class="alert alert-primary" role="alert">Wait... Deleting in Process</div> 
+<div *ngIf="errorMessage === 'delete'" class="alert alert-danger" role="alert">Server Timeout... Please Try Again</div>

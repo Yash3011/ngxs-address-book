@@ -19,6 +19,9 @@
     "@angular/platform-browser": "~11.2.8",
     "@angular/platform-browser-dynamic": "~11.2.8",
     "@angular/router": "~11.2.8",
+    "@ngxs/store": "^3.6.2-dev.master-eaa5d86",
+    "bootstrap": "^5.0.0-beta3",
+    "ngx-pagination": "^5.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"
@@ -27,6 +30,7 @@
     "@angular-devkit/build-angular": "~0.1102.7",
     "@angular/cli": "~11.2.7",
     "@angular/compiler-cli": "~11.2.8",
+    "@ngxs/devtools-plugin": "^3.7.1",
     "@types/jasmine": "~3.6.0",
     "@types/node": "^12.11.1",
     "codelyzer": "^6.0.0",
